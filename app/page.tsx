@@ -22,16 +22,26 @@ export default async function Home() {
         </header>
 
         {/* CREATE: simple form that posts directly to the addTodo server action */}
-        <form action={addTodo} className="mb-6 flex gap-2">
+        <form action={addTodo} className="mb-6 space-y-2">
+          {/* Short title for the task */}
           <input
             type="text"
             name="title"
             placeholder="What do you need to do?"
-            className="flex-1 rounded-md border border-zinc-200 px-3 py-2 text-sm outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
+            className="w-full rounded-md border border-zinc-200 px-3 py-2 text-sm text-gray-900 placeholder-gray-500 outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
           />
+
+          {/* Optional longer description for extra details */}
+          <input
+            type="text"
+            name="description"
+            placeholder="Add an optional description (e.g. details, notes)..."
+            className="w-full rounded-md border border-zinc-200 px-3 py-2 text-sm text-gray-900 placeholder-gray-500 outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
+          />
+
           <button
             type="submit"
-            className="rounded-md bg-blue-600 px-4 py-2 text-sm font-medium text-white hover:bg-blue-700"
+            className="w-full rounded-md bg-blue-600 px-4 py-2 text-sm font-medium text-white hover:bg-blue-700"
           >
             Add
           </button>
