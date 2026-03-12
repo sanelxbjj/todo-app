@@ -49,30 +49,39 @@ export function TodoList({ todos }: Props) {
       {todos.map((todo) => (
         <li
           key={todo.id}
-          className="flex items-center justify-between rounded-md border border-zinc-200 bg-white px-3 py-2 shadow-sm"
+          className="flex items-start justify-between rounded-md border border-zinc-200 bg-white px-3 py-2 shadow-sm"
         >
-          <label className="flex items-center gap-2">
+          <label className="flex flex-1 cursor-pointer items-start gap-2">
             <input
               type="checkbox"
               checked={todo.is_completed}
               onChange={() => handleToggle(todo)}
               disabled={isPending}
-              className="h-4 w-4 rounded border-zinc-300 text-blue-600 focus:ring-blue-500"
+              className="mt-1 h-4 w-4 rounded border-zinc-300 text-blue-600 focus:ring-blue-500"
             />
-            <span
-              className={`text-sm ${
-                todo.is_completed ? "text-zinc-400 line-through" : "text-zinc-800"
-              }`}
-            >
-              {todo.title}
-            </span>
+
+            <div className="flex-1">
+              {/* Main title */}
+              <span
+                className={`block text-sm ${
+                  todo.is_completed ? "text-zinc-400 line-through" : "text-zinc-800"
+                }`}
+              >
+                {todo.title}
+              </span>
+
+              {/* Optional description shown below the title (only if not empty) */}
+              {todo.description && todo.description.trim().length > 0 && (
+                <p className="mt-1 text-xs text-zinc-500">{todo.description}</p>
+              )}
+            </div>
           </label>
 
           <button
             type="button"
             onClick={() => handleDelete(todo.id)}
             disabled={isPending}
-            className="text-xs font-medium text-red-500 hover:text-red-600"
+            className="ml-3 text-xs font-medium text-red-500 hover:text-red-600"
           >
             Delete
           </button>

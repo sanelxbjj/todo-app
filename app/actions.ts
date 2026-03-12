@@ -26,13 +26,21 @@ export async function getTodos(): Promise<Todo[]> {
 // CREATE: Add a new todo based on form data submitted from the page.
 export async function addTodo(formData: FormData) {
   const title = String(formData.get("title") ?? "").trim();
+  const descriptionRaw = formData.get("description");
+
+  // If the user left the description empty, we save it as an empty string "".
+  // This keeps the value predictable (always a string), which is easier to work with.
+  const description =
+    descriptionRaw === null ? "" : String(descriptionRaw).trim();
 
   // If the input is empty or only spaces, do nothing.
   if (!title) {
     return;
   }
 
-  const { error } = await supabase.from("todos").insert({ title });
+  const { error } = await supabase
+    .from("todos")
+    .insert({ title, description });
 
   if (error) {
     console.error("Error adding todo:", error.message);
